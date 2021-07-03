@@ -2,7 +2,6 @@ import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Point
 import matplotlib.pyplot as plt
-from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 
 """
 DATA SOURCES:
@@ -42,13 +41,6 @@ fig, ax = plt.subplots(figsize=(8, 5))
 
 reprojected_boston_map.plot(ax=ax, alpha=0.2, color="blue")
 geo_wifi_df.plot(ax=ax, alpha=0.3, color="red", marker="v", markersize=18)
-
-# Overlay with a custom marker (wifi symbol)
-wifi_img = OffsetImage(plt.imread('./images/wifi-symbol.png'))
-
-for x, y in wifi_df[['device_long', 'device_lat']].values.tolist():
-  ab = AnnotationBbox(wifi_img, (x, y), frameon=False)
-  ax.add_artist(ab)
 
 plt.title("Boston's Wicked Free Wifi Locations")
 
