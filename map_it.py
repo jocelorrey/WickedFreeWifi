@@ -41,7 +41,7 @@ geo_wifi_df = gpd.GeoDataFrame(wifi_df,
 fig, ax = plt.subplots()
 
 reprojected_boston_map.plot(ax=ax, alpha=0.2, color="blue")
-geo_wifi_df.plot(ax=ax, alpha=0.2, color="red", marker='$\\nabla$', markersize=45)
+geo_wifi_df.plot(ax=ax, alpha=0.2, color="red", marker='o', markersize=25)
 
 plt.title("Boston's Wicked Free Wifi Locations", fontweight="bold")
 plt.xlabel("Longitude")
