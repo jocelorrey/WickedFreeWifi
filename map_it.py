@@ -41,7 +41,7 @@ geo_wifi_df = gpd.GeoDataFrame(wifi_df,
 fig, ax = plt.subplots()
 
 reprojected_boston_map.plot(ax=ax, alpha=0.2, color="blue")
-geo_wifi_df.plot(ax=ax, alpha=0.3, color="red", marker=7, markersize=45)
+geo_wifi_df.plot(ax=ax, alpha=0.2, color="red", marker='$\\nabla$', markersize=45)
 
 plt.title("Boston's Wicked Free Wifi Locations", fontweight="bold")
 plt.xlabel("Longitude")
@@ -61,7 +61,7 @@ Useful resources:
 3. https://towardsdatascience.com/geopandas-101-plot-any-data-with-a-latitude-and-longitude-on-a-map-98e01944b972
 4. https://medium.com/@ianforrest11/graphing-latitudes-and-longitudes-on-a-map-bf64d5fca391
 5. https://gis.stackexchange.com/questions/276940/re-projecting-lat-and-long-in-python-geopandas-but-geometry-unchanged
-6. https://stackoverflow.com/questions/22566284/matplotlib-how-to-plot-images-instead-of-points
-7. https://stackoverflow.com/questions/3927389/add-unit-to-yaxis-labels-in-matplotlib
+6. https://stackoverflow.com/questions/3927389/add-unit-to-yaxis-labels-in-matplotlib
+7. https://matplotlib.org/stable/api/markers_api.html
 """
 
