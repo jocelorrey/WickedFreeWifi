@@ -2,6 +2,7 @@ import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Point
 import matplotlib.pyplot as plt
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 
 """
 DATA SOURCES:
@@ -42,13 +43,19 @@ fig, ax = plt.subplots(figsize=(8, 5))
 reprojected_boston_map.plot(ax=ax, alpha=0.2, color="blue")
 geo_wifi_df.plot(ax=ax, alpha=0.3, color="red", marker="v", markersize=18)
 
+# Overlay with a custom marker (wifi symbol)
+wifi_img = OffsetImage(plt.imread('./images/wifi-symbol.png'))
+
+for x, y in wifi_df[['device_long', 'device_lat']].values.tolist():
+  ab = AnnotationBbox(wifi_img, (x, y), frameon=False)
+  ax.add_artist(ab)
+
 plt.title("Boston's Wicked Free Wifi Locations")
 
 plt.xlim(-71.200, -70.983) # longitude
 plt.ylim(42.220, 42.400) # latitude
 
 plt.show()
-
 
 """
 Useful resources:
@@ -57,5 +64,6 @@ Useful resources:
 3. https://towardsdatascience.com/geopandas-101-plot-any-data-with-a-latitude-and-longitude-on-a-map-98e01944b972
 4. https://medium.com/@ianforrest11/graphing-latitudes-and-longitudes-on-a-map-bf64d5fca391
 5. https://gis.stackexchange.com/questions/276940/re-projecting-lat-and-long-in-python-geopandas-but-geometry-unchanged
+6. https://stackoverflow.com/questions/22566284/matplotlib-how-to-plot-images-instead-of-points
 """
 
