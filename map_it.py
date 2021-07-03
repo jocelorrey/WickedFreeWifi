@@ -40,8 +40,8 @@ geo_wifi_df = gpd.GeoDataFrame(wifi_df,
 # Plot them together
 fig, ax = plt.subplots()
 
-reprojected_boston_map.plot(ax=ax, alpha=0.2, color="blue")
-geo_wifi_df.plot(ax=ax, alpha=0.2, color="red", marker='o', markersize=25)
+reprojected_boston_map.plot(ax=ax, alpha=0.15, color="blue")
+geo_wifi_df.plot(ax=ax, alpha=0.55, cmap='prism', marker='o', markersize=25)
 
 plt.title("Boston's Wicked Free Wifi Locations", fontweight="bold")
 plt.xlabel("Longitude")
@@ -63,5 +63,6 @@ Useful resources:
 5. https://gis.stackexchange.com/questions/276940/re-projecting-lat-and-long-in-python-geopandas-but-geometry-unchanged
 6. https://stackoverflow.com/questions/3927389/add-unit-to-yaxis-labels-in-matplotlib
 7. https://matplotlib.org/stable/api/markers_api.html
+8. https://matplotlib.org/stable/tutorials/colors/colormaps.html
 """
 
