@@ -1,7 +1,8 @@
 import pandas as pd
 import geopandas as gpd
-from shapely.geometry import Point
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FormatStrFormatter
+from shapely.geometry import Point
 
 """
 DATA SOURCES:
@@ -37,16 +38,20 @@ geo_wifi_df = gpd.GeoDataFrame(wifi_df,
                                geometry='coords')
 
 # Plot them together
-fig, ax = plt.subplots(figsize=(8, 5))
+fig, ax = plt.subplots()
 
 reprojected_boston_map.plot(ax=ax, alpha=0.2, color="blue")
 geo_wifi_df.plot(ax=ax, alpha=0.3, color="red", marker="v", markersize=18)
 
-plt.title("Boston's Wicked Free Wifi Locations")
-
-plt.xlim(-71.200, -70.983) # longitude
-plt.ylim(42.220, 42.400) # latitude
-
+plt.title("Boston's Wicked Free Wifi Locations", fontweight="bold")
+plt.xlabel("Longitude")
+plt.ylabel("Latitude")
+plt.xlim(-71.200, -70.983)
+plt.ylim(42.220, 42.400)
+plt.xticks(rotation=65) # rotate x-axis labels
+plt.gca().xaxis.set_major_formatter(FormatStrFormatter(u'%.2f\u00B0')) # show deg symbol
+plt.gca().yaxis.set_major_formatter(FormatStrFormatter(u'%.2f\u00B0'))
+plt.tight_layout()
 plt.show()
 
 """
@@ -57,5 +62,6 @@ Useful resources:
 4. https://medium.com/@ianforrest11/graphing-latitudes-and-longitudes-on-a-map-bf64d5fca391
 5. https://gis.stackexchange.com/questions/276940/re-projecting-lat-and-long-in-python-geopandas-but-geometry-unchanged
 6. https://stackoverflow.com/questions/22566284/matplotlib-how-to-plot-images-instead-of-points
+7. https://stackoverflow.com/questions/3927389/add-unit-to-yaxis-labels-in-matplotlib
 """
 
