@@ -4,14 +4,6 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import FormatStrFormatter
 from shapely.geometry import Point
 
-"""
-DATA SOURCES:
-Wicked Free Wifi Locations - CSV:
-https://data.boston.gov/dataset/wicked-free-wifi-locations/resource/50be2132-e83f-4197-b5d1-e83ef153a217
-
-Boston Transportation Districts - Shapefile:
-https://data.boston.gov/dataset/boston-transportation-department-btd-districts1/resource/fe16d9d0-92ff-4f71-b021-9cceffba47ed
-"""
 
 # Load data from CSV into a pandas dataframe
 data_file = "./data/Wicked_Free_WiFi_Locations.csv"
