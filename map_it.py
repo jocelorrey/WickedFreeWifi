@@ -4,35 +4,32 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import FormatStrFormatter
 from shapely.geometry import Point
 
+# Define data files
+csv_file = './data/Wicked_Free_WiFi_Locations.csv'
+shp_file = './data/Boston_Transportation_Department_(BTD)_Districts_.shp'
 
 # Load data from CSV into a pandas dataframe
-data_file = "./data/Wicked_Free_WiFi_Locations.csv"
 columns_of_interest = ['device_lat', 'device_long'] #, 'neighborhood_name']
-wifi_df = pd.read_csv(data_file, usecols=columns_of_interest)
+wifi_df = pd.read_csv(csv_file, usecols=columns_of_interest)
 
-# specify lat/long geometry
-geometry = gpd.points_from_xy(wifi_df.device_lat, 
-                              wifi_df.device_long)
-
+# Specify lat/long geometry
+geometry = gpd.points_from_xy(wifi_df.device_lat, wifi_df.device_long)
 wifi_df['coords'] = wifi_df[['device_long', 'device_lat']].values.tolist()
 wifi_df['coords'] = wifi_df['coords'].apply(Point) 
-# Note: Look at using a more efficient way than apply. (Probably fine w/such a small dataset though.)
 
-# Load the Boston shapefile into a geopandas dataframe
-boston_map = gpd.read_file('./data/Boston_Transportation_Department_(BTD)_Districts_.shp')
+# Load shapefile into a geopandas dataframe
+boston_map = gpd.read_file(shp_file)
 
 # Reproject map to align with lat/long of wifi locations
-reprojected_boston_map = boston_map.to_crs({'init': 'epsg:4326'})
+boston_map = boston_map.to_crs({'init': 'epsg:4326'})
 
 # Create geopandas dataframe for wifi data
-geo_wifi_df = gpd.GeoDataFrame(wifi_df, 
-                               crs=reprojected_boston_map.crs, 
-                               geometry='coords')
+geo_wifi_df = gpd.GeoDataFrame(wifi_df, crs=boston_map.crs, geometry='coords')
 
 # Plot them together
 fig, ax = plt.subplots()
 
-reprojected_boston_map.plot(ax=ax, alpha=0.15, color="blue")
+boston_map.plot(ax=ax, alpha=0.15, color="blue")
 geo_wifi_df.plot(ax=ax, alpha=0.55, cmap='prism', marker='o', markersize=25)
 
 plt.title("Boston's Wicked Free Wifi Locations", fontweight="bold")
